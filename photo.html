@@ -9,7 +9,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
+            height: 100vh; /* Full height for PC view */
             overflow: hidden;
             font-family: 'Arial', sans-serif;
             position: relative;
@@ -19,29 +19,31 @@
             text-align: center;
             position: relative;
             z-index: 1; /* Ensure content is above background */
-            padding: 20px; /* Add padding around the container */
+            padding: 40px; /* Increased padding for PC */
             border: 2px solid #ff69b4; /* Border for the container */
             border-radius: 15px; /* Rounded corners */
             background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent white background */
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3); /* Shadow effect */
-            animation: float 3s ease-in-out infinite; /* Floating effect for the container */
+            width: 80%; /* Set width for PC */
+            max-width: 800px; /* Max width for larger screens */
         }
         .birthday-message {
-            font-size: 3em; /* Increased font size */
+            font-size: 3em; /* Larger font size for PC */
             color: #FFD700; /* Gold color */
             margin: 20px 0; /* Add margin for spacing */
             animation: bounce 1s infinite; /* Bouncing effect */
         }
         .photo {
-            width: 700px; /* Increased photo width */
+            width: 100%; /* Make photo responsive */
+            height: auto; /* Maintain aspect ratio */
             border-radius: 15px;
             margin-bottom: 20px; /* Space below the photo */
             animation: zoomIn 1s ease forwards; /* Zoom-in effect for the photo only */
         }
         .button {
             margin-top: 20px;
-            padding: 10px 20px;
-            font-size: 1.5em; /* Increased button font size */
+            padding: 15px 30px; /* Increased padding for PC */
+            font-size: 1.5em; /* Larger font size for PC */
             color: white;
             background-color: #ff69b4; /* Original button color */
             border: none;
@@ -68,11 +70,6 @@
             0% { transform: scale(0); opacity: 0; }
             100% { transform: scale(1); opacity: 1; }
         }
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
-        }
-        /* Background image */
         .background-image {
             position: absolute;
             top: 0;
@@ -88,11 +85,22 @@
     </style>
 </head>
 <body>
+    <audio id="background-audio" autoplay loop>
+        <source src="https://raw.githubusercontent.com/VYOM622/M/main/B.mp3" type="audio/mpeg"> <!-- Path to your audio file on GitHub -->
+        Your browser does not support the audio element.
+    </audio>
+    
     <div class="background-image"></div> <!-- Background image -->
     <div class="container">
-         <img src="https://raw.githubusercontent.com/VYOM622/M/main/12.jpg" alt="Happy Birthday" class="photo">
+        <img src="C:\Users\user\Desktop\00\12\12.jpg" alt="Happy Birthday" class="photo"> <!-- Increased photo area -->
         <div class="birthday-message">Happy Birthday, My Love!</div>
         <a href="birthday_wish.html" class="button">Back to Birthday Wish</a>
     </div>
+
+    <script>
+        // Set the audio volume to 40%
+        const audioElement = document.getElementById('background-audio');
+        audioElement.volume = 0.3; // Set volume to 30%
+    </script>
 </body>
 </html>
