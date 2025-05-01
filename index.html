@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Birthday Countdown Timer</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      font-family: 'Arial', sans-serif;
+      color: #ffffff;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background: url('https://images.rawpixel.com/image_800/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIyLTA1L2Zyc2t5X3N0YXJzX25pZ2h0X3NwYWNlLWltYWdlLWt5YmNwMmJmLmpwZw.jpg') no-repeat center center fixed;
+      background-size: cover;
+      overflow: hidden;
+      position: relative;
+    }
+
+    h1 {
+      font-size: 3em;
+      margin-bottom: 20px;
+      text-shadow: 0 0 5px rgba(0,0,0,0.7);
+      animation: fadeIn 2s ease forwards;
+      position: relative;
+      z-index: 2;
+    }
+
+    .countdown {
+      font-size: 2em;
+      margin: 20px 0;
+      animation: pulse 1.5s infinite;
+      text-shadow: 0 0 6px rgba(0,0,0,0.8);
+      position: relative;
+      z-index: 2;
+    }
+
+    .button {
+      background-color: #4caf50;
+      color: #ffffff;
+      border: none;
+      padding: 15px 30px;
+      font-size: 1.2em;
+      cursor: pointer;
+      border-radius: 5px;
+      transition: background-color 0.3s ease, box-shadow 0.3s ease;
+      text-decoration: none;
+      display: inline-block;
+      text-shadow: 0 0 3px rgba(0,0,0,0.6);
+      position: relative;
+      z-index: 2;
+    }
+
+    .button:hover {
+      background-color: #66bb6a;
+      box-shadow: 0 0 20px rgba(76, 175, 80, 0.8);
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+    }
+
+    /* Falling star styles */
+    .falling-star {
+      position: fixed;
+      top: -10px;
+      background: linear-gradient(45deg, white, rgba(255,255,255,0));
+      opacity: 0.8;
+      border-radius: 50%;
+      filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.8));
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
+      animation-name: fall;
+      animation-timing-function: linear;
+      animation-iteration-count: 1;
+      pointer-events: none;
+      z-index: 1;
+      transform: rotate(-45deg);
+    }
+
+    @keyframes fall {
+      0% {
+        transform: translateX(0) translateY(0) rotate(-45deg);
+        opacity: 0.8;
+      }
+      80% {
+        opacity: 0.8;
+      }
+      100% {
+        transform: translateX(150vw) translateY(100vh) rotate(-45deg);
+        opacity: 0;
+      }
+    }
+
+    /* Popup overlay */
+    .popup-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-color: rgba(0,0,0,0.75);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 10;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.5s ease;
+    }
+    .popup-overlay.show {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    /* Popup box */
+    .popup-box {
+      background: #222;
+      padding: 40px 60px;
+      border-radius: 15px;
+      box-shadow: 0 0 30px #4caf50, 0 0 60px #4caf50;
+      text-align: center;
+      color: #4caf50;
+      font-size: 2.5em;
+      font-weight: bold;
+      font-family: 'Arial Black', Arial, sans-serif;
+      user-select: none;
+      position: relative;
+      max-width: 90vw;
+      box-sizing: border-box;
+    }
+
+    /* Close button */
+    .close-btn {
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      background: transparent;
+      border: none;
+      font-size: 1.5em;
+      color: #4caf50;
+      cursor: pointer;
+      font-weight: bold;
+      line-height: 1;
+      transition: color 0.3s ease;
+    }
+    .close-btn:hover {
+      color: #76ff03;
+    }
+
+  </style>
+</head>
+<body>
+  <div>
+    <h1>Birthday Countdown Timer</h1>
+    <div class="countdown" id="countdown"></div>
+    <a href="birthday_wish.html" class="button">Happy Birthday My Love</a>
+  </div>
+
+  <!-- Popup Element -->
+  <div class="popup-overlay" id="popup">
+    <div class="popup-box">
+      <button class="close-btn" id="closePopup" aria-label="Close popup">&times;</button>
+      🎉 Happy Birthday Miteexa (Awesome)! 🎉
+    </div>
+  </div>
+
+  <script>
+    // Countdown timer script
+    const birthdayDate = new Date("2025-05-04T00:00:00").getTime();
+    const countdownElement = document.getElementById("countdown");
+    const popup = document.getElementById("popup");
+    const closeBtn = document.getElementById("closePopup");
+
+    const countdownFunction = setInterval(() => {
+      const now = new Date().getTime();
+      const distance = birthdayDate - now;
+
+      if (distance < 0) {
+        clearInterval(countdownFunction);
+        countdownElement.innerHTML = "00-00-00-00";
+        showPopup();
+        return;
+      }
+
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+      countdownElement.innerHTML =
+        days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
+    }, 1000);
+
+    function showPopup() {
+      popup.classList.add('show');
+    }
+
+    closeBtn.addEventListener('click', () => {
+      popup.classList.remove('show');
+    });
+
+    // Create one falling star every 10 seconds, varying length and speed
+    setInterval(() => {
+      const star = document.createElement('div');
+      star.className = 'falling-star';
+
+      // Random length between 40 and 120 px height, width proportionally smaller
+      const length = 40 + Math.random() * 80;
+      star.style.height = length + 'px';
+      star.style.width = (length / 25) + 'px';
+
+      // Random horizontal start position between 0 and 80vw
+      star.style.left = Math.random() * 80 + 'vw';
+
+      // Animation duration between 6s and 9s
+      star.style.animationDuration = (6 + Math.random() * 3) + 's';
+
+      star.style.animationDelay = '0s';
+
+      document.body.appendChild(star);
+
+      // Remove star after animation completes
+      setTimeout(() => {
+        star.remove();
+      }, (parseFloat(star.style.animationDuration) * 1000));
+    }, 10000);
+  </script>
+</body>
+</html>
