@@ -6,73 +6,65 @@
     <title>Happy Birthday Wishes</title>
     <style>
         body {
-            background: url('https://www.transparenttextures.com/patterns/wood-pattern.png'); /* Wood texture background */
-            color: #333333; /* Dark text color for contrast */
+            background: url('https://www.transparenttextures.com/patterns/wood-pattern.png');
+            color: #333333;
             font-family: 'Arial', sans-serif;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            height: 100vh;
+            height: auto; /* Allow height to adjust based on content */
             margin: 0;
             text-align: center;
-            position: relative; /* Position relative for absolute children */
-            overflow: hidden; /* Hide overflow for decorations */
-            opacity: 0; /* Start hidden for fade-in effect */
-            animation: fadeIn 1s forwards; /* Fade-in animation */
+            position: relative;
+            overflow: hidden;
+            opacity: 0;
+            animation: fadeIn 1s forwards;
         }
 
         @keyframes fadeIn {
-            to {
-                opacity: 1; /* Fully visible */
-            }
+            to { opacity: 1; }
         }
 
         h1 {
-            font-size: 3em;
+            font-size: 2.5em; /* Adjust font size for mobile */
             margin-bottom: 20px;
-            animation: bounce 1s infinite; /* Bounce animation */
+            animation: bounce 1s infinite;
         }
 
         @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% {
-                transform: translateY(0); /* Original position */
-            }
-            40% {
-                transform: translateY(-20px); /* Move up */
-            }
-            60% {
-                transform: translateY(-10px); /* Move down */
-            }
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-20px); }
+            60% { transform: translateY(-10px); }
         }
 
         p {
-            font-size: 1.5em;
+            font-size: 1.2em; /* Adjust font size for mobile */
             margin-bottom: 40px;
-            animation: fadeIn 1s forwards; /* Fade-in animation for paragraph */
-            animation-delay: 0.5s; /* Delay for paragraph */
+            animation: fadeIn 1s forwards;
+            animation-delay: 0.5s;
         }
 
         .link {
-            background-color: #4caf50; /* Green link button */
+            background-color: #4caf50;
             color: #ffffff;
             border: none;
-            padding: 15px 30px;
-            font-size: 1.2em;
+            padding: 10px 20px; /* Reduced padding for mobile */
+            font-size: 1em; /* Adjust font size for mobile */
             cursor: pointer;
             border-radius: 5px;
             text-decoration: none;
-            transition: background-color 0.3s, transform 0.3s; /* Transition for hover effect */
+            transition: background-color 0.3s, transform 0.3s;
             display: inline-block;
             margin: 10px;
-            animation: fadeIn 1s forwards; /* Fade-in animation for links */
-            animation-delay: 1s; /* Delay for links */
+            animation: fadeIn 1s forwards;
+            animation-delay: 1s;
         }
 
         .link:hover {
-            background-color: #66bb6a; /* Lighter green on hover */
-            transform: scale(1.1) rotate(2deg); /* Scale up and rotate slightly on hover */
-            animation: shake 0.5s; /* Shake effect on hover */
+            background-color: #66bb6a;
+            transform: scale(1.1) rotate(2deg);
+            animation: shake 0.5s;
         }
 
         @keyframes shake {
@@ -83,43 +75,36 @@
             100% { transform: translate(0); }
         }
 
-        /* Star styles */
         .star {
             position: absolute;
             width: 15px;
             height: 15px;
-            background-color: #ffcc00; /* Star color */
+            background-color: #ffcc00;
             clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
-            opacity: 0.6; /* Reduced opacity for less twinkling effect */
-            animation: moveUpAndDown 3s infinite; /* Move up and down animation */
+            opacity: 0.6;
+            animation: moveUpAndDown 3s infinite;
         }
 
         @keyframes moveUpAndDown {
-            0%, 100% {
-                transform: translateY(0); /* Initial position */
-            }
-            50% {
-                transform: translateY(-10px); /* Move up */
-            }
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
         }
     </style>
 </head>
 <body>
-    <audio autoplay loop>
-         <source src="https://raw.githubusercontent.com/VYOM622/M/main/1.mp3" type="audio/mpeg">
+    <audio id="background-audio" autoplay loop>
+        <source src="https://raw.githubusercontent.com/VYOM622/M/main/1.mp3" type="audio/mpeg"> <!-- Path to your audio file on GitHub -->
+        Your browser does not support the audio element.
     </audio>
     
     <div>
         <h1>Happy Birthday!</h1>
         <p>Choose a special message for you:</p>
-        <a href="photo.html" class="link">Message 1</a> <!-- Hyperlink to Your Cute Photo -->
-        
+        <a href="photo.html" class="link">Message 1</a>
         <a href="a.html" class="link">Message 2</a>
-        
-        <a href="personal_message.html" class="link">Message 3</a> <!-- Updated to link to the new personal message page -->
+        <a href="personal_message.html" class="link">Message 3</a>
     </div>
 
-    <!-- Star Elements arranged in specified order -->
     <div class="star" style="left: 5%; top: 10%; animation-delay: 0s;"></div>
     <div class="star" style="left: 15%; top: 20%; animation-delay: 0.5s;"></div>
     <div class="star" style="left: 25%; top: 5%; animation-delay: 1s;"></div>
@@ -150,5 +135,11 @@
     <div class="star" style="left: 75%; top: 35%; animation-delay: 3.5s;"></div>
     <div class="star" style="left: 85%; top: 45%; animation-delay: 4s;"></div>
     <div class="star" style="left: 95%; top: 40%; animation-delay: 4.5s;"></div>
+
+    <script>
+        // Set the audio volume to 50%
+        const audioElement = document.getElementById('background-audio');
+        audioElement.volume = 0.5; // Set volume to 50%
+    </script>
 </body>
 </html>
