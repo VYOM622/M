@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Your Cute Photo</title>
     <style>
         body {
-            background: url('https://www.transparenttextures.com/patterns/paper.png'); /* Textured paper background */
-            color: #333333; /* Dark text color for contrast */
+            background: url('https://www.transparenttextures.com/patterns/paper.png');
+            color: #333333;
             font-family: 'Arial', sans-serif;
             display: flex;
             flex-direction: column;
@@ -16,9 +16,9 @@
             height: 100vh;
             margin: 0;
             text-align: center;
-            animation: fadeIn 1s; /* Fade-in animation for the body */
-            overflow: hidden; /* Hide overflow for falling stars */
-            box-shadow: 0 0 30px rgba(255, 204, 0, 0.8); /* Glowing effect on the page */
+            animation: fadeIn 1s;
+            overflow: hidden;
+            box-shadow: 0 0 30px rgba(255, 204, 0, 0.8);
         }
 
         @keyframes fadeIn {
@@ -29,8 +29,8 @@
         h1 {
             font-size: 3em;
             margin-bottom: 20px;
-            animation: slideIn 1s; /* Slide-in animation for the main heading */
-            text-shadow: 0 0 10px rgba(255, 204, 0, 0.8); /* Glowing effect on the heading */
+            animation: slideIn 1s;
+            text-shadow: 0 0 10px rgba(255, 204, 0, 0.8);
         }
 
         @keyframes slideIn {
@@ -38,19 +38,65 @@
             to { transform: translateY(0); opacity: 1; }
         }
 
+        @keyframes fadeInContainer {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .kavita-container {
+            background: rgba(255, 255, 255, 0.5); /* Transparent background */
+            border: 2px solid rgba(255, 204, 0, 0.8); /* Golden border */
+            border-radius: 15px; /* Rounded corners */
+            padding: 40px; /* Space inside container */
+            box-shadow: 0 0 15px rgba(255, 204, 0, 0.5); /* Reduced shadow effect */
+            max-height: 400px; /* Fixed height to enable scrolling */
+            max-width: 600px; /* Width limit */
+            overflow-y: auto; /* Enable vertical scrolling */
+            scrollbar-width: none; /* Hide scrollbar Firefox */
+            animation: fadeInContainer 1s ease-in-out; /* Fade-in effect */
+            position: relative; /* For absolute positioning of pseudo elements */
+        }
+
+        .kavita-container::-webkit-scrollbar {
+            display: none; /* Hide scrollbar for Chrome, Safari, Opera */
+        }
+
+        /* Glowing vertical lines 2cm (approx 75px) away from container edges */
+        /* Updated to 5px width lines with full container height */
+        .kavita-container::before,
+        .kavita-container::after {
+            content: '';
+            position: absolute;
+            width: 5px;  /* Line width */
+            height: 100%; /* Full height of container */
+            background: rgba(255, 204, 0, 0.8);
+            box-shadow: 0 0 20px rgba(255, 204, 0, 0.8);
+            top: 0;
+        }
+
+        .kavita-container::before {
+            left: -75px; /* 2 cm approx in pixels */
+            border-radius: 2px;
+        }
+
+        .kavita-container::after {
+            right: -75px; /* 2 cm approx in pixels */
+            border-radius: 2px;
+        }
+
         .kavita {
-            font-size: 1em; /* Smaller font size for the kavita */
+            font-size: 1.3em;
             margin: 20px 0;
-            animation: fadeIn 1s; /* Fade-in animation for the kavita */
+            animation: fadeIn 1s;
             opacity: 0;
-            animation-fill-mode: forwards; /* Keep the final state */
-            white-space: pre-line; /* Preserve line breaks */
-            text-shadow: 0 0 5px rgba(255, 204, 0, 0.5); /* Glowing effect on the poem */
+            animation-fill-mode: forwards;
+            white-space: pre-line;
+            text-shadow: 0 0 10px rgba(255, 204, 0, 0.8);
         }
 
         .back-link {
-            background-color: #4caf50; /* Green link button */
-            color: #ffffff;
+            background-color: #4caf50;
+            color: #fff;
             border: none;
             padding: 15px 30px;
             font-size: 1.2em;
@@ -59,57 +105,89 @@
             text-decoration: none;
             transition: background-color 0.3s;
             display: inline-block;
-            margin: 10px;
-            animation: bounce 1s; /* Bounce animation for the back link */
+            margin: 20px;
+            animation: bounce 1s;
         }
 
         @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
-            40% { transform: translateY(-10px); }
-            60% { transform: translateY(-5px); }
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0);
+            }
+            40% {
+                transform: translateY(-10px);
+            }
+            60% {
+                transform: translateY(-5px);
+            }
         }
 
-        /* Star styles */
         .star {
             position: absolute;
-            width: 10px;
-            height: 10px;
-            background-color: #ffcc00; /* Star color */
-            clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%); /* Star shape */
-            opacity: 0.8; /* Star opacity */
-            box-shadow: 0 0 10px rgba(255, 204, 0, 0.8), 0 0 20px rgba(255, 204, 0, 0.5); /* Glowing effect */
-            animation: fall 3s linear forwards; /* Falling animation */
+            width: 15px;
+            height: 15px;
+            background-color: #ffcc00;
+            clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+            opacity: 0.8;
+            box-shadow: 0 0 10px rgba(255, 204, 0, 0.8), 0 0 20px rgba(255, 204, 0, 0.5);
+            animation: fall 3s linear forwards;
         }
 
         @keyframes fall {
-            0% { transform: translateY(-100px); opacity: 1; }
-            100% { transform: translateY(100vh); opacity: 0; }
+            0% {
+                transform: translateY(-100px);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh);
+                opacity: 0;
+            }
+        }
+
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 2em;
+            }
+
+            .kavita {
+                font-size: 1em;
+            }
+
+            .back-link {
+                padding: 10px 20px;
+                font-size: 1em;
+            }
         }
     </style>
 </head>
 <body>
+    <audio id="background-audio" loop>
+        <source src="https://raw.githubusercontent.com/VYOM622/M/main/V.mp3" type="audio/mpeg" />
+        Your browser does not support the audio element.
+    </audio>
+
     <div>
         <h1>Happy Birthday!</h1>
-        
-        <div class="kavita">
-            Mitu, તું મળ્યા પછી સમજાયું પ્રેમ શું હોય છે,<br>
-            હસતી તારી આંખોમાં સ્વર્ગ જોવાય છે.<br>
-            તારો જન્મદિવસ છે, મારું દિલથી દુઆ કરું,<br>
-            હર જન્મમાં તું જ મળે, એ ખુદાને વારંવાર કહું.<br><br>
+        <div class="kavita-container">
+            <div class="kavita">
+                Mitu, તું મળ્યા પછી સમજાયું પ્રેમ શું હોય છે,<br />
+                હસતી તારી આંખોમાં સ્વર્ગ જોવાય છે.<br />
+                તારો જન્મદિવસ છે, મારું દિલથી દુઆ કરું,<br />
+                હર જન્મમાં તું જ મળે, એ ખુદાને વારંવાર કહું.<br /><br />
 
-            તું હસે એટલું પૂરતું છે મારાં દિવસ માટે,<br>
-            તું નાં હોય તો જગત લાગે એકલતા ભરી રાતે.<br>
-            તું છે તો બધું છે, તું નહિ તો ખાલી છું,<br>
-            Mitu, તને કહું છું આજે, હું આખો તારો છું.<br><br>
+                તું હસે એટલું પૂરતું છે મારાં દિવસ માટે,<br />
+                તું નાં હોય તો જગત લાગે એકલતા ભરી રાતે.<br />
+                તું છે તો બધું છે, તું નહિ તો ખાલી છું,<br />
+                Mitu, તને કહું છું આજે, હું આખો તારો છું.<br /><br />
 
-            આજ તારો દિવસ છે, Mitu, તું જેનો પ્રકાશ છે,<br>
-            હવે અને હંમેશા તારો પ્રેમ મારાં દિલમાં વસે.<br>
-            તને જોઈને જ શરૂ થાય દરેક સવાર,<br>
-            આજ અને હંમેશા, તું જ છે મારાં જીવનનો શ્રેષ્ઠ આધાર.<br><br>
+                આજ તારો દિવસ છે, Mitu, તું જેનો પ્રકાશ છે,<br />
+                હવે અને હંમેશા તારો પ્રેમ મારાં દિલમાં વસે.<br />
+                તને જોઈને જ શરૂ થાય દરેક સવાર,<br />
+                આજ અને હંમેશા, તું જ છે મારાં જીવનનો શ્રેષ્ઠ આધાર.<br /><br />
 
-            🎂 Happy Birthday, Mitu
+                🎂 Happy Birthday, Mitu
+            </div>
         </div>
-        
+
         <a href="birthday_wish.html" class="back-link">Back to Birthday Wishes</a>
     </div>
 
@@ -118,20 +196,23 @@
         function createFallingStar() {
             const star = document.createElement('div');
             star.className = 'star';
-            // Set random horizontal position
             star.style.left = Math.random() * 100 + 'vw';
-            // Set random animation duration between 3s and 5s
             star.style.animationDuration = (3 + Math.random() * 2) + 's';
             document.body.appendChild(star);
 
-            // Remove star after animation completes
             star.addEventListener('animationend', () => {
                 star.remove();
             });
         }
 
-        // Create a star every 500 milliseconds
-        setInterval(createFallingStar, 500);
+        setInterval(createFallingStar, 1200); // Create a star every 1200 milliseconds
+
+        // Set audio volume and play
+        document.addEventListener('DOMContentLoaded', function () {
+            const audio = document.getElementById('background-audio');
+            audio.volume = 0.4; // Set volume to 40%
+            audio.play(); // Start playing the audio
+        });
     </script>
 </body>
 </html>
