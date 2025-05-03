@@ -31,10 +31,10 @@
     }
 
     .countdown {
-      font-size: 2em;
+      font-size: 2.5em; /* Increased font size for better visibility */
       margin: 20px 0;
       animation: pulse 1.5s infinite;
-      text-shadow: 0 0 6px rgba(0,0,0,0.8);
+      text-shadow: 0 0 6px rgba(0,0,0,0.8); /* Added text shadow for contrast */
       position: relative;
       z-index: 2;
     }
@@ -157,61 +157,80 @@
       color: #76ff03;
     }
 
+    /* Responsive styles */
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 2em;
+      }
+      .countdown {
+        font-size: 1.5em;
+      }
+      .button {
+        padding: 10px 20px;
+        font-size: 1em;
+      }
+    }
   </style>
 </head>
 <body>
   <div>
-    <h1>Birthday Countdown Timer</h1>
-    <div class="countdown" id="countdown"></div>
-    <a href="birthday_wish.html" class="button">Happy Birthday My Love</a>
+    <h1 role="heading" aria-level="1">Birthday Countdown Timer</h1>
+    <div class="countdown" id="countdown" aria-live="polite">00d 00h 00m 00s</div>
+    <a href="birthday_wish.html" class="button" role="button" aria-label="Wish Happy Birthday My Love">Happy Birthday My Love</a>
   </div>
   
   <!-- Audio Element -->
   <audio id="background-audio" autoplay loop>
-    <source src="https://raw.githubusercontent.com/VYOM622/M/main/X.mp3" type="audio/mpeg"> <!-- Ensure this URL is correct -->
+    <source src="https://raw.githubusercontent.com/VYOM622/M/main/X.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
   </audio>
   
   <!-- Popup Element -->
-  <div class="popup-overlay" id="popup">
+  <div class="popup-overlay" id="popup" role="dialog" aria-labelledby="popupTitle" aria-hidden="true">
     <div class="popup-box">
       <button class="close-btn" id="closePopup" aria-label="Close popup">&times;</button>
-      🎉 Happy Birthday Mitu (Awesome)! 🎉
+      <div id="popupTitle">🎉 Happy Birthday Mitu (Awesome)! 🎉</div>
     </div>
   </div>
 
   <script>
     // Countdown timer script
-    const birthdayDate = new Date("2025-05-04T00:00:00").getTime();
-    const countdownElement = document.getElementById("countdown");
-    const popup = document.getElementById("popup");
-    const closeBtn = document.getElementById("closePopup");
+    const birthdayDate = new Date("2025-05-04T00:00:00").getTime(); // Set the target birthday date
+    const countdownElement = document.getElementById("countdown"); // Get the countdown display element
+    const popup = document.getElementById("popup"); // Get the popup overlay element
+    const closeBtn = document.getElementById("closePopup"); // Get the close button for the popup
 
+    // Function to update the countdown every second
     const countdownFunction = setInterval(() => {
-      const now = new Date().getTime();
-      const distance = birthdayDate - now;
+      const now = new Date().getTime(); // Get the current time
+      const distance = birthdayDate - now; // Calculate the time remaining
 
+      // If the countdown is finished
       if (distance < 0) {
-        clearInterval(countdownFunction);
-        countdownElement.innerHTML = "00-00-00-00";
-        showPopup();
+        clearInterval(countdownFunction); // Stop the countdown
+        countdownElement.innerHTML = "00-00-00-00"; // Display zero countdown
+        showPopup(); // Show the birthday popup
         return;
       }
 
+      // Calculate days, hours, minutes, and seconds
       const days = Math.floor(distance / (1000 * 60 * 60 * 24));
       const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
       const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
       const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-      countdownElement.innerHTML =
-        days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
+      // Update the countdown display
+      countdownElement.innerHTML = days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
     }, 1000);
 
     function showPopup() {
-      popup.classList.add('show');
+      popup.classList.add('show'); // Show the popup
+      popup.setAttribute('aria-hidden', 'false'); // Update ARIA attribute
     }
 
     closeBtn.addEventListener('click', () => {
-      popup.classList.remove('show');
+      popup.classList.remove('show'); // Hide the popup
+      popup.setAttribute('aria-hidden', 'true'); // Update ARIA attribute
     });
 
     // Create one falling star every 10 seconds, varying length and speed
@@ -230,8 +249,6 @@
       // Animation duration between 6s and 9s
       star.style.animationDuration = (6 + Math.random() * 3) + 's';
 
-      star.style.animationDelay = '0s';
-
       document.body.appendChild(star);
 
       // Remove star after animation completes
@@ -243,6 +260,12 @@
     // Set the audio volume to 20%
     const audioElement = document.getElementById('background-audio');
     audioElement.volume = 0.2; // Volume is set between 0.0 (silent) and 1.0 (full volume)
+
+    // Error handling for audio element
+    audioElement.onerror = function() {
+      console.error("Audio file failed to load.");
+      // Optionally, you can display a message to the user
+    };
   </script>
 </body>
 </html>
