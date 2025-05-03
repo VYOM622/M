@@ -122,7 +122,6 @@
       pointer-events: auto;
     }
     
-
     /* Popup box */
     .popup-box {
       background: #222;
@@ -166,10 +165,12 @@
     <div class="countdown" id="countdown"></div>
     <a href="birthday_wish.html" class="button">Happy Birthday My Love</a>
   </div>
- <!-- Audio Element -->
-  <audio autoplay loop>
+  
+  <!-- Audio Element -->
+  <audio id="background-audio" autoplay loop>
     <source src="https://raw.githubusercontent.com/VYOM622/M/main/X.mp3" type="audio/mpeg"> <!-- Ensure this URL is correct -->
   </audio>
+  
   <!-- Popup Element -->
   <div class="popup-overlay" id="popup">
     <div class="popup-box">
@@ -239,9 +240,9 @@
       }, (parseFloat(star.style.animationDuration) * 1000));
     }, 10000);
 
-     // Set the audio volume to 20%
-        const audioElement = document.getElementById('background-audio');
-        audioElement.volume = 0.1; // Volume is set between 0.0 (silent) and 1.0 (full volume)
+    // Set the audio volume to 20%
+    const audioElement = document.getElementById('background-audio');
+    audioElement.volume = 0.2; // Volume is set between 0.0 (silent) and 1.0 (full volume)
   </script>
 </body>
 </html>
