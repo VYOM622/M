@@ -157,6 +157,20 @@
       color: #76ff03;
     }
 
+    /* Pause button */
+    #pauseAudio {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      z-index: 3;
+      padding: 5px; /* Smaller padding */
+      font-size: 1.5em; /* Adjusted font size for the symbol */
+      background: transparent; /* No background */
+      border: none; /* No border */
+      cursor: pointer; /* Pointer cursor */
+      color: #ffffff; /* White color for the symbol */
+    }
+
     /* Responsive styles */
     @media (max-width: 600px) {
       h1 {
@@ -182,8 +196,11 @@
   <audio id="background-audio" autoplay loop>
         <source src="https://raw.githubusercontent.com/VYOM622/M/main/X.mp3" type="audio/mpeg"> <!-- Link to your audio file -->
         Your browser does not support the audio element.
-    </audio>
+  </audio>
   
+  <!-- Pause Button with Symbol -->
+  <button id="pauseAudio" role="button" aria-label="Pause Background Music">⏸️</button> <!-- Pause Symbol -->
+
   <!-- Popup Element -->
   <div class="popup-overlay" id="popup" role="dialog" aria-labelledby="popupTitle" aria-hidden="true">
     <div class="popup-box">
@@ -193,30 +210,45 @@
   </div>
 
   <script>
-           // Set the date of the birthday (May 4, 2025)
-        const birthdayDate = new Date("2025-05-04T00:00:00").getTime();
+    // Set the date of the birthday (May 4, 2025)
+    const birthdayDate = new Date("2025-05-04T00:00:00").getTime();
 
-        // Update the countdown every second
-        const countdownFunction = setInterval(function() {
-            const now = new Date().getTime();
-            const distance = birthdayDate - now;
+    // Update the countdown every second
+    const countdownFunction = setInterval(function() {
+        const now = new Date().getTime();
+        const distance = birthdayDate - now;
 
-            // Time calculations for days, hours, minutes, and seconds
-            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+        // Time calculations for days, hours, minutes, and seconds
+        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-            // Display the result in the countdown element
-            document.getElementById("countdown").innerHTML = 
-                days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
+        // Display the result in the countdown element
+        document.getElementById("countdown").innerHTML = 
+            days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
 
-            // If the countdown is over, display a message
-            if (distance < 0) {
-                clearInterval(countdownFunction);
-                document.getElementById("countdown").innerHTML = "Happy Birthday!";
-            }
-        }, 1000);
+        // If the countdown is over, display a message
+        if (distance < 0) {
+            clearInterval(countdownFunction);
+            document.getElementById("countdown").innerHTML = "Happy Birthday!";
+        }
+    }, 1000);
+
+    // Get the audio element and pause button
+    const audioElement = document.getElementById('background-audio');
+    const pauseButton = document.getElementById('pauseAudio');
+
+    // Add event listener to pause the audio
+    pauseButton.addEventListener('click', () => {
+        if (audioElement.paused) {
+            audioElement.play(); // Play the audio if it's paused
+            pauseButton.innerHTML = '⏸️'; // Update button symbol to pause
+        } else {
+            audioElement.pause(); // Pause the audio
+            pauseButton.innerHTML = '▶️'; // Update button symbol to play
+        }
+    });
 
     function showPopup() {
       popup.classList.add('show'); // Show the popup
@@ -253,7 +285,6 @@
     }, 10000);
 
     // Set the audio volume to 20%
-    const audioElement = document.getElementById('background-audio');
     audioElement.volume = 0.1; // Volume is set between 0.0 (silent) and 1.0 (full volume)
   </script>
 </body>
