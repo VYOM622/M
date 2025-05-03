@@ -15,7 +15,7 @@
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      background: url('https://images.rawpixel.com/image_800/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIyLTA1L2Zyc2t5X3N0YXJzX25pZ2h0X3NwYWNlLWltYWdlLWt5YmNwMmJmLmpwZw.jpg') no-repeat center center fixed;
+      background: url('https://raw.githubusercontent.com/VYOM622/M/main/1.jpg') no-repeat center center fixed;
       background-size: cover;
       overflow: hidden;
       position: relative;
@@ -121,6 +121,10 @@
       opacity: 1;
       pointer-events: auto;
     }
+     <!-- Audio Element -->
+  <audio autoplay loop>
+    <source src="https://raw.githubusercontent.com/VYOM622/M/main/X.mp3" type="audio/mpeg"> <!-- Ensure this URL is correct -->
+  </audio>
 
     /* Popup box */
     .popup-box {
@@ -234,6 +238,10 @@
         star.remove();
       }, (parseFloat(star.style.animationDuration) * 1000));
     }, 10000);
+
+     // Set the audio volume to 20%
+        const audioElement = document.getElementById('background-audio');
+        audioElement.volume = 0.1; // Volume is set between 0.0 (silent) and 1.0 (full volume)
   </script>
 </body>
 </html>
