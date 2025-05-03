@@ -179,11 +179,10 @@
     <a href="birthday_wish.html" class="button" role="button" aria-label="Wish Happy Birthday My Love">Happy Birthday My Love</a>
   </div>
   
-  <!-- Audio Element -->
   <audio id="background-audio" autoplay loop>
-    <source src="https://raw.githubusercontent.com/VYOM622/M/main/X.mp3" type="audio/mpeg">
-    Your browser does not support the audio element.
-  </audio>
+        <source src="https://raw.githubusercontent.com/VYOM622/M/main/X.mp3" type="audio/mpeg"> <!-- Link to your audio file -->
+        Your browser does not support the audio element.
+    </audio>
   
   <!-- Popup Element -->
   <div class="popup-overlay" id="popup" role="dialog" aria-labelledby="popupTitle" aria-hidden="true">
@@ -257,14 +256,9 @@
       }, (parseFloat(star.style.animationDuration) * 1000));
     }, 10000);
 
-    // Set the audio volume to 20%
-    const audioElement = document.getElementById('background-audio');
-    audioElement.volume = 0.2; // Volume is set between 0.0 (silent) and 1.0 (full volume)
-
-    // Error handling for audio element
-    audioElement.onerror = function() {
-      console.error("Audio file failed to load.");
-      // Optionally, you can display a message to the user
+  // Set the audio volume to 20%
+        const audioElement = document.getElementById('background-audio');
+        audioElement.volume = 0.1; // Volume is set between 0.0 (silent) and 1.0 (full volume)
     };
   </script>
 </body>
