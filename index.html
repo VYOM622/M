@@ -211,6 +211,11 @@
     <div class="popup-box">
       <button class="close-btn" id="closePopup" aria-label="Close popup">&times;</button>
       <div id="popupTitle">🎉 Happy Birthday Mitu (Awesome)! 🎉</div>
+      <!-- New Audio Element for File Z -->
+      <audio id="birthday-audio" autoplay>
+          <source src="https://raw.githubusercontent.com/VYOM622/M/main/Z.mp3" type="audio/mpeg">
+          Your browser does not support the audio element.
+      </audio>
     </div>
   </div>
   
@@ -231,6 +236,7 @@
     const closeBtn = document.getElementById("closePopup");
     const waitPopup = document.getElementById("waitPopup");
     const closeWaitBtn = document.getElementById("closeWaitPopup");
+    const birthdayAudio = document.getElementById('birthday-audio');
 
     let timeLeft = birthdayDate - new Date().getTime();
 
@@ -288,10 +294,15 @@
     function showPopup() {
       popup.classList.add('show');
       popup.setAttribute('aria-hidden', 'false');
+      birthdayAudio.play(); // Play the birthday audio
+      audioElement.pause(); // Pause the background audio
     }
     function hidePopup() {
       popup.classList.remove('show');
       popup.setAttribute('aria-hidden', 'true');
+      birthdayAudio.pause(); // Pause the birthday audio
+      birthdayAudio.currentTime = 0; // Reset the birthday audio to start
+      audioElement.play(); // Resume the background audio
     }
     function showWaitPopup() {
       waitPopup.classList.add('show');
