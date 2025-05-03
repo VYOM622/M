@@ -32,6 +32,7 @@
             transition: box-shadow 0.4s ease; /* Transition for hover effect */
             width: 80%; /* Responsive width */
             max-width: 600px; /* Max width for larger screens */
+            box-shadow: 0 0 20px rgba(76, 175, 80, 0.8), 0 0 30px rgba(76, 175, 80, 0.5); /* Permanent glowing effect */
         }
 
         h1 {
@@ -63,18 +64,24 @@
         .back-link:hover {
             transform: scale(1.1); /* Scale effect on hover */
         }
-
-        /* Glowing effect on hover */
-        .message-container:hover {
-            box-shadow: 0 0 20px rgba(76, 175, 80, 0.8), 0 0 30px rgba(76, 175, 80, 0.5); /* Glowing green effect */
-        }
     </style>
 </head>
 <body>
+    <audio id="background-audio" autoplay loop>
+        <source src="https://raw.githubusercontent.com/VYOM622/M/main/E.mp3" type="audio/mpeg"> <!-- Link to your audio file -->
+        Your browser does not support the audio element.
+    </audio>
+    
     <div class="message-container">
         <h1>Happy Birthday My Awesome</h1>
         <p>Happy Birthday, my love! 🎉 From the first moment I met you, I knew my life was about to change. You’ve brought me more happiness than I ever knew was possible. You are my heart, my home, my everything. I hope today brings you the same joy you give me every day. I love you endlessly! ❤️🎂</p>
         <a href="birthday_wish.html" class="back-link">Back to Birthday Wishes</a>
     </div>
+
+    <script>
+        // Set the audio volume to 20%
+        const audioElement = document.getElementById('background-audio');
+        audioElement.volume = 0.1; // Volume is set between 0.0 (silent) and 1.0 (full volume)
+    </script>
 </body>
 </html>
